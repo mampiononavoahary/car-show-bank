@@ -1,7 +1,6 @@
 ![](https://img.shields.io/badge/Spring_boot_3-blueviolet?style=for-the-badge)
-![](https://img.shields.io/badge/Java_17g-yellow?style=for-the-badge)
 
-$\mathcal{{Spring \ java \ 22 \ vs Spring \ security \ vs \ jpa} \}$
+$\mathcal{{Spring \ java \ 22 \ vs \ Spring \ security \ vs \ jpa} \}$
 
 • $\ \ \textcolor{blueviolet}{ Salon \ de \ l'automobile  }$
 
