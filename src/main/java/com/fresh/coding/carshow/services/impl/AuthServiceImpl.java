@@ -5,7 +5,6 @@ import com.fresh.coding.carshow.dtos.requests.UserRequest;
 import com.fresh.coding.carshow.dtos.responses.AuthResponse;
 import com.fresh.coding.carshow.enums.Role;
 import com.fresh.coding.carshow.exceptions.BadRequestException;
-import com.fresh.coding.carshow.exceptions.NotFoundException;
 import com.fresh.coding.carshow.mappers.UserMapper;
 import com.fresh.coding.carshow.repositories.UserRepository;
 import com.fresh.coding.carshow.services.AuthService;
