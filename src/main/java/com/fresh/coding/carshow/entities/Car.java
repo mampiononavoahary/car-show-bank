@@ -43,7 +43,7 @@ public class Car implements Serializable {
 
     private Integer power;
 
-    private Integer placeNumber;
+    private String placeNumber;
 
     @Enumerated(EnumType.STRING)
     private CarStatus status;
