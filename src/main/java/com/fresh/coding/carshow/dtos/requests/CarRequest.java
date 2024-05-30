@@ -1,7 +1,10 @@
 package com.fresh.coding.carshow.dtos.requests;
 
 import com.fresh.coding.carshow.enums.CarStatus;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record CarRequest(
         Long id,

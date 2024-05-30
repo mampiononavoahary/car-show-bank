@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
 
     private final String uploadDir = "static/";
 
@@ -28,9 +28,9 @@ public class FileServiceImpl implements FileService{
             var uploadDirFile = classPathResources.getFile();
             var folderPath = uploadDirFile.getAbsolutePath();
             var folder = new File(folderPath);
-            if (!folder.exists()){
+            if (!folder.exists()) {
                 var created = folder.mkdirs();
-                if (!created){
+                if (!created) {
                     throw new FileOperationException("Failed to create directory: " + folderPath);
                 }
             }
@@ -38,9 +38,9 @@ public class FileServiceImpl implements FileService{
             var dest = new File(filePath);
             file.transferTo(dest);
             return ServletUriComponentsBuilder.fromCurrentContextPath().path("/" + fileName).toUriString();
-         } catch (IOException e) {
+        } catch (IOException e) {
             throw new FileOperationException("Failed to save file", e);
-         }
+        }
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FileServiceImpl implements FileService{
         }
     }
 
-    private String  generateRandomFileName(MultipartFile file) {
+    private String generateRandomFileName(MultipartFile file) {
         var currentTime = System.currentTimeMillis();
         var uuid = UUID.randomUUID().toString();
         return currentTime + "_" + uuid + "_" + StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));

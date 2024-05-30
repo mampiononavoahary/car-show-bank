@@ -13,9 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @RequiredArgsConstructor
 @Service
-public class CarServiceImpl implements CarService  {
+public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
     private final CarMapper carMapper;
@@ -25,7 +26,7 @@ public class CarServiceImpl implements CarService  {
     @Override
     public List<CarResponse> createAllCars(List<CarRequest> carRequests) {
         var carsSaved = new ArrayList<CarResponse>();
-        for (var carRequest: carRequests){
+        for (var carRequest : carRequests) {
             var car = carMapper.toEntity(carRequest);
             var saved = carRepository.save(car);
             var carRes = carMapper.toResponse(saved);
@@ -36,7 +37,7 @@ public class CarServiceImpl implements CarService  {
 
     @Override
     public Paginate<CarResponse> getAllCars(PageRequest pageable) {
-        var carPage  = carRepository.findAll(pageable);
+        var carPage = carRepository.findAll(pageable);
         var carResponse = carPage.map(carMapper::toResponse).getContent();
         return new Paginate<>(
                 carResponse,

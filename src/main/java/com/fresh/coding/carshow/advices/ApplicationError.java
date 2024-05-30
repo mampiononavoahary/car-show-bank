@@ -7,4 +7,5 @@ public record ApplicationError<T>(
         T message,
         LocalDate errorDate,
         int status
-) {}
+) {
+}

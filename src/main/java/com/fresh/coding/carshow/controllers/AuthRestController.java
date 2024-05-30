@@ -20,12 +20,12 @@ public class AuthRestController {
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody  @Valid LoginRequest loginRequest){
+    public AuthResponse login(@RequestBody @Valid LoginRequest loginRequest) {
         return authService.login(loginRequest);
     }
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody  @Valid UserRequest userRequest){
+    public AuthResponse register(@RequestBody @Valid UserRequest userRequest) {
         return authService.register(userRequest);
     }
 }

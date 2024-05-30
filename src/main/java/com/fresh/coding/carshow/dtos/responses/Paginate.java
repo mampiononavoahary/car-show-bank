@@ -7,4 +7,5 @@ public record Paginate<T>(
         Long total,
         Integer page,
         Integer perPage
-) {}
+) {
+}

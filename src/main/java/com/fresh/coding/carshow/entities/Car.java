@@ -48,9 +48,16 @@ public class Car implements Serializable {
     @Enumerated(EnumType.STRING)
     private CarStatus status;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
+
+    public void addImage(Image imageSaved) {
+        if (!this.images.contains(imageSaved)) {
+            this.images.add(imageSaved);
+            imageSaved.setCar(this);
+        }
+    }
 }

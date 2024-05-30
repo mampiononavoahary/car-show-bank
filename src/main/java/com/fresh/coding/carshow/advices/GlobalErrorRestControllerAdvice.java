@@ -3,7 +3,6 @@ package com.fresh.coding.carshow.advices;
 import com.fresh.coding.carshow.exceptions.BadRequestException;
 import com.fresh.coding.carshow.exceptions.InternalServerException;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,7 +33,7 @@ public class GlobalErrorRestControllerAdvice {
     @ExceptionHandler({NotFoundException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApplicationError<String> handleError(NotFoundException ex){
+    public ApplicationError<String> handleError(NotFoundException ex) {
         return new ApplicationError<>(
                 ex.getMessage(),
                 LocalDate.now(),
@@ -45,7 +44,7 @@ public class GlobalErrorRestControllerAdvice {
     @ExceptionHandler({BadRequestException.class, IllegalArgumentException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApplicationError<String> handleError(BadRequestException ex){
+    public ApplicationError<String> handleError(BadRequestException ex) {
         return new ApplicationError<>(
                 ex.getMessage(),
                 LocalDate.now(),
@@ -69,14 +68,13 @@ public class GlobalErrorRestControllerAdvice {
     @ExceptionHandler(InternalServerException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApplicationError<String> handlerError(InternalServerException ex){
+    public ApplicationError<String> handlerError(InternalServerException ex) {
         return new ApplicationError<>(
                 ex.getMessage(),
                 LocalDate.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value()
         );
     }
-
 
 
     @ExceptionHandler(UsernameNotFoundException.class)

@@ -51,6 +51,7 @@ public class JwtServiceImpl implements JwtService {
     public long getExpirationTime() {
         return jwtExpiration;
     }
+
     @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final var username = extractUsername(token);

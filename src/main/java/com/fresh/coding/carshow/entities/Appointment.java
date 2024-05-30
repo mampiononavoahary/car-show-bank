@@ -38,7 +38,7 @@ public class Appointment implements Serializable {
     private Instant appointmentDate;
 
     @Enumerated(EnumType.STRING)
-    private AppointmentStatus  status;
+    private AppointmentStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Car car;

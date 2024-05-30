@@ -32,7 +32,6 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
 
-
     @Override
     public AuthResponse login(LoginRequest request) {
         this.authenticationManager.authenticate(

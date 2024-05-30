@@ -35,7 +35,7 @@ public class AppointmentMapper {
         );
     }
 
-    public  String formatInstant(Instant instant) {
+    public String formatInstant(Instant instant) {
         var localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return localDateTime.format(formatter);

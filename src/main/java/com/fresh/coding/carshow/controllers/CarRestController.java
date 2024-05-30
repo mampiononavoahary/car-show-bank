@@ -30,7 +30,7 @@ public class CarRestController {
     @PostMapping
     public List<CarResponse> createAllCars(
             @RequestBody
-            List<@Valid CarRequest> carRequests){
+            List<@Valid CarRequest> carRequests) {
         return carService.createAllCars(carRequests);
     }
 }

@@ -3,7 +3,7 @@ package com.fresh.coding.carshow.dtos.responses;
 import com.fresh.coding.carshow.enums.AppointmentStatus;
 
 
-public record AppointmentResponse (
+public record AppointmentResponse(
         Long id,
         String name,
         String firstName,
@@ -12,4 +12,5 @@ public record AppointmentResponse (
         String contact,
         String appointmentDate,
         AppointmentStatus status
-) {}
+) {
+}

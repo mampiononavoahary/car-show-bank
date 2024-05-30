@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public User toEntity(UserRequest userRequest){
+    public User toEntity(UserRequest userRequest) {
         return (new User())
                 .setEmail(userRequest.email())
                 .setPwd(userRequest.password())
@@ -16,7 +16,7 @@ public class UserMapper {
                 .setId(userRequest.id());
     }
 
-    public UserResponse toResponse(User user){
+    public UserResponse toResponse(User user) {
         return new UserResponse(
                 user.getId(),
                 user.getEmail(),
