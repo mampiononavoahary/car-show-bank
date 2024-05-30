@@ -4,7 +4,7 @@ import com.fresh.coding.carshow.enums.CarStatus;
 
 import java.util.List;
 
-public record CarResponse(
+public record CarWithImage (
         Long id,
         String name,
         String description,
@@ -17,6 +17,6 @@ public record CarResponse(
         Integer power,
         String placeNumber,
         CarStatus status,
-        List<String> imageUrls
-) {
+        List<ImageResponse> imageResponses
+){
 }

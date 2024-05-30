@@ -3,10 +3,17 @@ package com.fresh.coding.carshow.mappers;
 import com.fresh.coding.carshow.dtos.requests.CarRequest;
 import com.fresh.coding.carshow.dtos.responses.CarResponse;
 import com.fresh.coding.carshow.entities.Car;
+import com.fresh.coding.carshow.entities.Image;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
+@RequiredArgsConstructor
 @Component
 public class CarMapper {
+
+
     public Car toEntity(CarRequest carRequest) {
         return Car.builder()
                 .id(carRequest.id())
@@ -37,7 +44,11 @@ public class CarMapper {
                 car.getType(),
                 car.getPower(),
                 car.getPlaceNumber(),
-                car.getStatus()
+                car.getStatus(),
+                car.getImages().stream()
+                        .map(Image::getUrl)
+                        .collect(Collectors.toList())
+
         );
     }
 }
