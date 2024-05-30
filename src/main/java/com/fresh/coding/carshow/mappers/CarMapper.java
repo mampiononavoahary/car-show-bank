@@ -45,7 +45,7 @@ public class CarMapper {
                 car.getPower(),
                 car.getPlaceNumber(),
                 car.getStatus(),
-                car.getImages().stream()
+                car.getImages() == null ? null : car.getImages().stream()
                         .map(Image::getUrl)
                         .collect(Collectors.toList())
 
