@@ -4,7 +4,6 @@ import com.fresh.coding.carshow.enums.CarStatus;
 import jakarta.validation.constraints.*;
 
 public record CarRequest(
-        @NotNull
         Long id,
 
         @NotBlank
@@ -22,7 +21,8 @@ public record CarRequest(
         @NotNull
         Long price,
 
-        @NotBlank String color,
+        @NotBlank
+        String color,
 
         @NotBlank
         String motorType,
