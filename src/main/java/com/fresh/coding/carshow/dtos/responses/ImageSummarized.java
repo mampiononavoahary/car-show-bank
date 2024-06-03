@@ -1,6 +1,6 @@
 package com.fresh.coding.carshow.dtos.responses;
 
-public record ImageResponse(
+public record ImageSummarized(
         Long id,
         String url
 ) {

@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @Builder
+@ToString
 @Accessors(chain = true)
 public class Image implements Serializable {
     @Id
@@ -23,6 +24,6 @@ public class Image implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Car car;
 }

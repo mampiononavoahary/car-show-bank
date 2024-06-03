@@ -16,6 +16,7 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @Builder
+@ToString
 @Accessors(chain = true)
 public class Appointment implements Serializable {
     @Id

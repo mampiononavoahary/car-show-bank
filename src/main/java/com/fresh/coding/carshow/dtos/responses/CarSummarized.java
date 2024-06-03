@@ -6,7 +6,7 @@ import com.fresh.coding.carshow.enums.CarStatus;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record CarResponse(
+public record CarSummarized(
         Long id,
         String name,
         String description,
@@ -19,9 +19,9 @@ public record CarResponse(
         Integer power,
         String placeNumber,
         CarStatus status,
-        List<String> imageUrls
+        List<ImageSummarized> imageUrls
 ) {
-    public CarResponse {
+    public CarSummarized {
         if (imageUrls != null && imageUrls.isEmpty()) {
             imageUrls = null;
         }

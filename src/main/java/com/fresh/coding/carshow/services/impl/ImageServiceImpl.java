@@ -1,6 +1,6 @@
 package com.fresh.coding.carshow.services.impl;
 
-import com.fresh.coding.carshow.dtos.responses.ImageResponse;
+import com.fresh.coding.carshow.dtos.responses.ImageSummarized;
 import com.fresh.coding.carshow.entities.Image;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
 import com.fresh.coding.carshow.files.FileService;
@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,13 +28,19 @@ public class ImageServiceImpl implements ImageService {
 
     @Transactional
     @Override
-    public ImageResponse createImage(Long carId, MultipartFile file) {
+    public ImageSummarized createImage(Long carId, MultipartFile file) {
         var car = carRepository.findById(carId).orElseThrow(() -> new NotFoundException(String.format("Car with id %d not found", carId)));
         var url = fileService.saveFile(file);
-        var image = Image.builder().url(url).build();
+        var image = Image.builder().url(url).car(car).build();
         var imageSaved = imageRepository.save(image);
-        car.addImage(imageSaved);
         return imageMapper.toResponse(imageSaved);
+    }
+
+    @Override
+    public List<ImageSummarized> findAllImages() {
+        return imageRepository.findAll()
+                .stream().map(imageMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
 }

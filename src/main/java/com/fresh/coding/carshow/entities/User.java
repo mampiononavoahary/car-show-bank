@@ -19,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 @Builder
 @Accessors(chain = true)
 public class User implements Serializable, UserDetails {

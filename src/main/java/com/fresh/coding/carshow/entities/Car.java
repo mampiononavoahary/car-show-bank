@@ -6,8 +6,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -19,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
+@ToString
 public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,16 +47,4 @@ public class Car implements Serializable {
     @Enumerated(EnumType.STRING)
     private CarStatus status;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<Image> images = new ArrayList<>();
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private List<Appointment> appointments = new ArrayList<>();
-
-    public void addImage(Image imageSaved) {
-        if (!this.images.contains(imageSaved)) {
-            this.images.add(imageSaved);
-            imageSaved.setCar(this);
-        }
-    }
 }

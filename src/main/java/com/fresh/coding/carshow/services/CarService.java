@@ -1,21 +1,13 @@
 package com.fresh.coding.carshow.services;
 
 import com.fresh.coding.carshow.dtos.requests.CarRequest;
-import com.fresh.coding.carshow.dtos.responses.CarResponse;
+import com.fresh.coding.carshow.dtos.responses.CarSummarized;
+import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
 
 import java.util.List;
 
 public interface CarService {
+    List<CarSummarized> createAllCars(List<CarRequest> carRequests);
 
-    List<CarResponse> createAllCars(List<CarRequest> carRequests);
-
-
-    List<CarResponse> findPinnedCars(Integer limit);
-
-    CarResponse findById(Long id);
-
-    List<String> findAllByCarType();
-
-    List<String> findAllByMotorType();
-
+    List<CarWithImageSummarized> findAllCars();
 }
