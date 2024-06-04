@@ -12,4 +12,5 @@ import java.util.List;
 public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query("SELECT new com.fresh.coding.carshow.dtos.responses.ImageSummarized(i.id, i.url) FROM Image  i WHERE i.car.id = ?1")
     List<ImageSummarized> findAllByCarId(Long carId);
+    List<Image> findByCar_Id(Long id);
 }

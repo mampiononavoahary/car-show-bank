@@ -10,4 +10,16 @@ public interface CarService {
     List<CarSummarized> createAllCars(List<CarRequest> carRequests);
 
     List<CarWithImageSummarized> findAllCars();
+
+    List<String> findAllBrandOfCars(Integer limit);
+
+    List<CarSummarized> findAllCarByStatusPinned(Integer limit);
+
+    List<String> findAllMotorTypeOfCars();
+
+    List<String> findAllTypeOfCars();
+
+    CarSummarized modifyCarById(Long id, CarRequest carRequest);
+
+    CarSummarized deleteCarById(Long id);
 }

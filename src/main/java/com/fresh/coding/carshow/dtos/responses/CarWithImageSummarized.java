@@ -18,4 +18,5 @@ public record CarWithImageSummarized(
         String placeNumber,
         CarStatus status,
         List<ImageSummarized> images
-) {}
+) {
+}

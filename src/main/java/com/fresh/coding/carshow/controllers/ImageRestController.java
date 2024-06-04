@@ -26,4 +26,23 @@ public class ImageRestController {
     public List<ImageSummarized> getAllImages() {
         return imageService.findAllImages();
     }
+
+    @GetMapping("/{carId}")
+    public List<ImageSummarized> getImage(@PathVariable Long carId) {
+        return imageService.findImage(carId);
+    }
+
+    @PutMapping
+    public ImageSummarized createImage(
+            @RequestParam String carId,
+            @RequestParam String id,
+            @RequestParam MultipartFile file
+    ) {
+        return imageService.updateImage(Long.valueOf(id), Long.valueOf(carId), file);
+    }
+
+    @DeleteMapping("/{carId}")
+    public List<ImageSummarized> deleteImage(@PathVariable Long carId) {
+        return imageService.deleteImage( carId);
+    }
 }
