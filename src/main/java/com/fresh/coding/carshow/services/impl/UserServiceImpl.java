@@ -1,14 +1,12 @@
 package com.fresh.coding.carshow.services.impl;
 
 import com.fresh.coding.carshow.dtos.requests.UserRequest;
-import com.fresh.coding.carshow.dtos.responses.Paginate;
 import com.fresh.coding.carshow.dtos.responses.UserSummarized;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
 import com.fresh.coding.carshow.mappers.UserMapper;
 import com.fresh.coding.carshow.repositories.UserRepository;
 import com.fresh.coding.carshow.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserSummarized updateUser(Long id, UserRequest userRequest) {
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
-        user.setPwd(userRequest.password() != null ? passwordEncoder.encode(userRequest.password() ): null);
+        user.setPwd(userRequest.password() != null ? passwordEncoder.encode(userRequest.password()) : null);
         user.setName(userRequest.name());
         user.setEmail(userRequest.email());
         var savedUser = userRepository.save(user);

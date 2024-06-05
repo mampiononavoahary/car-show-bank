@@ -72,7 +72,7 @@ public class CarRestController {
     public List<CarWithImageSummarized> getCarsByTypeAndExcludeId(
             @PathVariable String type,
             @PathVariable Long id) {
-       return carService.findCarsByTypeAndExcludeId(type, id);
+        return carService.findCarsByTypeAndExcludeId(type, id);
     }
 
 }

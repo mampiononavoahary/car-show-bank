@@ -24,7 +24,7 @@ public class CarSearchServiceImpl implements CarSearchService {
         List<Car> res;
         if ((brand == null || brand.isEmpty()) && model != null) {
             res = carRepository.findAllByModelContainingIgnoreCase(model);
-        } else if ((model == null  || model.isEmpty()) && brand != null) {
+        } else if ((model == null || model.isEmpty()) && brand != null) {
             res = carRepository.findAllByBrandContainingIgnoreCase(brand);
         } else if (brand == null) {
             res = carRepository.findAll();

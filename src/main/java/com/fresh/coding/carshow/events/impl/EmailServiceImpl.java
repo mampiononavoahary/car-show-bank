@@ -3,7 +3,6 @@ package com.fresh.coding.carshow.events.impl;
 import com.fresh.coding.carshow.events.EmailService;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,7 +18,7 @@ public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender javaMailSender;
 
-    public EmailServiceImpl(JavaMailSender javaMailSender,@Value("${spring.mail.username}") String fromEmail) {
+    public EmailServiceImpl(JavaMailSender javaMailSender, @Value("${spring.mail.username}") String fromEmail) {
         this.javaMailSender = javaMailSender;
         this.fromEmail = fromEmail;
     }

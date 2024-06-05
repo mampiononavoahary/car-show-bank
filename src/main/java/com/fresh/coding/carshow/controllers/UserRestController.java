@@ -1,7 +1,6 @@
 package com.fresh.coding.carshow.controllers;
 
 import com.fresh.coding.carshow.dtos.requests.UserRequest;
-import com.fresh.coding.carshow.dtos.responses.Paginate;
 import com.fresh.coding.carshow.dtos.responses.UserSummarized;
 import com.fresh.coding.carshow.services.UserService;
 import jakarta.validation.Valid;
