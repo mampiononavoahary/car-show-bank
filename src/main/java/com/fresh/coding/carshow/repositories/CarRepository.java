@@ -26,7 +26,8 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     List<String> findAllTypeOfCars();
 
     @Query("SELECT c FROM Car c WHERE c.type = :type AND c.id <> :id")
-    List<Car> findAllByTypeAndExcludeId(@Param("type") String type, @Param("id") Long id);
+    Page<Car> findAllByTypeAndExcludeId(@Param("type") String type, @Param("id") Long id, Pageable pageable);
+
 
     List<Car> findAllByModelContainingIgnoreCase(String model);
 

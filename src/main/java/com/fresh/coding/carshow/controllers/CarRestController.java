@@ -69,10 +69,12 @@ public class CarRestController {
     }
 
     @GetMapping("/type/{type}/exclude/{id}")
-    public List<CarWithImageSummarized> getCarsByTypeAndExcludeId(
+    public Paginate<List<CarWithImageSummarized>> getCarsByTypeAndExcludeId(
             @PathVariable String type,
-            @PathVariable Long id) {
-        return carService.findCarsByTypeAndExcludeId(type, id);
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "1") String page,
+            @RequestParam(defaultValue = "10") String perPage) {
+        return carService.findCarsByTypeAndExcludeId(type, id, Integer.valueOf(page), Integer.valueOf(perPage));
     }
 
 }

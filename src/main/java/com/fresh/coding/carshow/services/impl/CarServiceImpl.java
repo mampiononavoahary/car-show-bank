@@ -4,6 +4,7 @@ import com.fresh.coding.carshow.dtos.requests.CarRequest;
 import com.fresh.coding.carshow.dtos.responses.CarSummarized;
 import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
 import com.fresh.coding.carshow.dtos.responses.Paginate;
+import com.fresh.coding.carshow.entities.Car;
 import com.fresh.coding.carshow.enums.CarStatus;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
 import com.fresh.coding.carshow.files.FileService;
@@ -14,6 +15,7 @@ import com.fresh.coding.carshow.repositories.ImageRepository;
 import com.fresh.coding.carshow.services.CarService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +109,17 @@ public class CarServiceImpl implements CarService {
     public Paginate<List<CarWithImageSummarized>> paginateCars(Integer page, Integer perPage) {
         var pageRequest = PageRequest.of(page - 1, perPage);
         var carsPage = carRepository.findAll(pageRequest);
+        return getListPaginate(carsPage);
+    }
+
+    @Override
+    public Paginate<List<CarWithImageSummarized>> findCarsByTypeAndExcludeId(String type, Long id, Integer page, Integer perPage) {
+        var pageRequest = PageRequest.of(page - 1, perPage);
+        var carsPage = carRepository.findAllByTypeAndExcludeId(type, id, pageRequest);
+        return getListPaginate(carsPage);
+    }
+
+    private Paginate<List<CarWithImageSummarized>> getListPaginate(Page<Car> carsPage) {
         var items = carsPage.getContent().stream().map(car -> {
             var images = imageRepository.findByCar_Id(car.getId())
                     .stream().map(imageMapper::toResponse)
@@ -119,15 +132,6 @@ public class CarServiceImpl implements CarService {
                 carsPage.getTotalPages(),
                 carsPage.getTotalElements()
         );
-    }
-
-    @Override
-    public List<CarWithImageSummarized> findCarsByTypeAndExcludeId(String type, Long id) {
-        var cars = carRepository.findAllByTypeAndExcludeId(type, id);
-        return cars.stream().map(car -> {
-            var images = imageRepository.findAllByCarId(car.getId());
-            return carMapper.toResponse(car, images);
-        }).collect(Collectors.toList());
     }
 
 
