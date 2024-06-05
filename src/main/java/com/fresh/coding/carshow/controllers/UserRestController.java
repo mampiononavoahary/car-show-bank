@@ -17,11 +17,9 @@ public class UserRestController {
     private final UserService userService;
 
     @GetMapping
-    public Paginate<List<UserSummarized>> getAllUsers(
-            @RequestParam(required = false, defaultValue = "0") String page,
-            @RequestParam(required = false, defaultValue = "10") String perPage
+    public List<UserSummarized> getAllUsers(
     ) {
-        return userService.findAllUsers(Integer.valueOf(page), Integer.valueOf(perPage));
+        return userService.findAllUsers();
     }
 
     @GetMapping("/{id}")

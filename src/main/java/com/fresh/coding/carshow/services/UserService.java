@@ -7,7 +7,7 @@ import com.fresh.coding.carshow.dtos.responses.UserSummarized;
 import java.util.List;
 
 public interface UserService {
-    Paginate<List<UserSummarized>> findAllUsers(Integer page, Integer perPage);
+    List<UserSummarized> findAllUsers();
 
     UserSummarized updateUser(Long id, UserRequest userRequest);
 

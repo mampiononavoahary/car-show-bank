@@ -23,16 +23,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Paginate<List<UserSummarized>> findAllUsers(Integer page, Integer perPage) {
-        var pageRequest = PageRequest.of(page, perPage);
-        var usersPage = userRepository.findAll(pageRequest);
-        var items = usersPage.getContent().stream().map(userMapper::toResponse).toList();
-        return new Paginate<>(
-                items,
-                usersPage.getNumber(),
-                usersPage.getTotalPages(),
-                usersPage.getTotalElements()
-        );
+    public List<UserSummarized> findAllUsers() {
+        return userRepository.findAll().stream().map(userMapper::toResponse).toList();
     }
 
     @Override
