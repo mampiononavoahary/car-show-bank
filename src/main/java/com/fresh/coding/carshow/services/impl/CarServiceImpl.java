@@ -105,7 +105,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Paginate<List<CarWithImageSummarized>> paginateCars(Integer page, Integer perPage) {
-        var pageRequest = PageRequest.of(page, perPage);
+        var pageRequest = PageRequest.of(page - 1, perPage);
         var carsPage = carRepository.findAll(pageRequest);
         var items = carsPage.getContent().stream().map(car -> {
             var images = imageRepository.findByCar_Id(car.getId())
