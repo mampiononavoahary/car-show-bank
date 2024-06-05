@@ -6,6 +6,7 @@ import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
 import com.fresh.coding.carshow.dtos.responses.Paginate;
 import com.fresh.coding.carshow.enums.CarStatus;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
+import com.fresh.coding.carshow.files.FileService;
 import com.fresh.coding.carshow.mappers.CarMapper;
 import com.fresh.coding.carshow.mappers.ImageMapper;
 import com.fresh.coding.carshow.repositories.CarRepository;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
     private final ImageRepository imageRepository;
+    private final FileService fileService;
     private final CarMapper carMapper;
     private final ImageMapper imageMapper;
 
@@ -88,9 +90,15 @@ public class CarServiceImpl implements CarService {
         return carMapper.toResponse(savedCar);
     }
 
+    @org.springframework.transaction.annotation.Transactional
     @Override
     public CarSummarized deleteCarById(Long id) {
         var car = carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car not found"));
+        var images = imageRepository.findByCar_Id(car.getId());
+        for (var image : images) {
+            fileService.deleteFile(image.getUrl());
+        }
+        imageRepository.deleteAll(images);
         carRepository.deleteById(car.getId());
         return carMapper.toResponse(car);
     }

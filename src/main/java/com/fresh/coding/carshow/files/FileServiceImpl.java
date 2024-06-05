@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public boolean deleteFile(String url) {
         try {
-            var fileName = url.substring(url.lastIndexOf('/' + 1));
+            var fileName = url.substring(url.lastIndexOf('/') + 1);
             var classPathResources = new ClassPathResource(uploadDir);
             var uploadDirFile = classPathResources.getFile();
             var folderPath = uploadDirFile.getAbsolutePath();

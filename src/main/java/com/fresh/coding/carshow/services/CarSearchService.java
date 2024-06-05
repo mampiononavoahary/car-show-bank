@@ -11,5 +11,5 @@ public interface CarSearchService {
 
     List<CarWithImageSummarized> findCarWithImagesByTypeMotor(String typeMotor);
 
-    List<CarWithImageSummarized> findCarWithImagesByIntervalPrice(String minPrice, String maxPrice);
+    List<CarWithImageSummarized> findCarWithImagesByIntervalPrice(Long minPrice, Long maxPrice);
 }

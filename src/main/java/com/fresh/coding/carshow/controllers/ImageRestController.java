@@ -15,11 +15,11 @@ public class ImageRestController {
     private final ImageService imageService;
 
     @PostMapping
-    public ImageSummarized createImage(
+    public List<ImageSummarized> createImage(
             @RequestParam String carId,
-            @RequestParam MultipartFile file
+            @RequestParam MultipartFile[] files
     ) {
-        return imageService.createImage(Long.valueOf(carId), file);
+        return imageService.createImage(Long.valueOf(carId), files);
     }
 
     @GetMapping
@@ -33,7 +33,7 @@ public class ImageRestController {
     }
 
     @PutMapping
-    public ImageSummarized createImage(
+    public ImageSummarized updateImage(
             @RequestParam String carId,
             @RequestParam String id,
             @RequestParam MultipartFile file

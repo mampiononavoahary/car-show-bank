@@ -37,7 +37,7 @@ public class CarRestController {
 
     @GetMapping
     public Paginate<List<CarWithImageSummarized>> getCarWithImages(
-            @RequestParam(defaultValue = "6") String page,
+            @RequestParam(defaultValue = "0") String page,
             @RequestParam(defaultValue = "10") String perPage
     ) {
         return carService.paginateCars(Integer.valueOf(page), Integer.valueOf(perPage));

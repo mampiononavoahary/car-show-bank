@@ -21,6 +21,7 @@ public class CarSearchRestController {
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) String model
     ) {
+        System.out.println(brand);
         return carSearchService.findCarWithImagesByModelAndBrand(
                 brand,
                 model
@@ -48,8 +49,8 @@ public class CarSearchRestController {
 
     @GetMapping("/search/interval-price")
     public List<CarWithImageSummarized> getCarWithImagesByIntervalPrice(
-            @RequestParam(required = false) String minPrice,
-            @RequestParam(required = false) String maxPrice
+            @RequestParam(required = false) Long minPrice,
+            @RequestParam(required = false) Long maxPrice
     ) {
         return carSearchService.findCarWithImagesByIntervalPrice(
                 minPrice,

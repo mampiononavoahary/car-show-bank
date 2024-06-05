@@ -1,6 +1,7 @@
 package com.fresh.coding.carshow.services.impl;
 
 import com.fresh.coding.carshow.dtos.responses.ImageSummarized;
+import com.fresh.coding.carshow.entities.Car;
 import com.fresh.coding.carshow.entities.Image;
 import com.fresh.coding.carshow.exceptions.InternalServerException;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
@@ -30,8 +31,18 @@ public class ImageServiceImpl implements ImageService {
 
     @Transactional
     @Override
-    public ImageSummarized createImage(Long carId, MultipartFile file) {
+    public List<ImageSummarized> createImage(Long carId, MultipartFile[] files) {
         var car = carRepository.findById(carId).orElseThrow(() -> new NotFoundException(String.format("Car with id %d not found", carId)));
+        var imageSummarizedList = new ArrayList<ImageSummarized>();
+        for (MultipartFile file : files) {
+            imageSummarizedList.add(saveImage(car, file));
+        }
+
+        return imageSummarizedList;
+    }
+
+    @Transactional
+    protected ImageSummarized saveImage(Car car, MultipartFile file) {
         var url = fileService.saveFile(file);
         var image = Image.builder().url(url).car(car).build();
         var imageSaved = imageRepository.save(image);
@@ -48,7 +59,7 @@ public class ImageServiceImpl implements ImageService {
     @Transactional
     @Override
     public ImageSummarized updateImage(Long id, Long carId, MultipartFile file) {
-        if (!carRepository.existsById(id)) {
+        if (!carRepository.existsById(carId)) {
             throw new NotFoundException(String.format("Car with id %d not found", carId));
         }
         var image = imageRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("Image with id %d not found", id)));

@@ -22,14 +22,14 @@ public class CarSearchServiceImpl implements CarSearchService {
     @Override
     public List<CarWithImageSummarized> findCarWithImagesByModelAndBrand(String brand, String model) {
         List<Car> res;
-        if (brand == null && model != null) {
-            res = carRepository.findAllByModelIgnoreCase(model);
-        } else if (model == null && brand != null) {
-            res = carRepository.findAllByBrandIgnoreCase(brand);
+        if ((brand == null || brand.isEmpty()) && model != null) {
+            res = carRepository.findAllByModelContainingIgnoreCase(model);
+        } else if ((model == null  || model.isEmpty()) && brand != null) {
+            res = carRepository.findAllByBrandContainingIgnoreCase(brand);
         } else if (brand == null) {
             res = carRepository.findAll();
         } else {
-            res = carRepository.findAllByBrandIgnoreCaseAndModelIgnoreCase(brand, model);
+            res = carRepository.findAllByBrandContainingIgnoreCaseAndModelContainingIgnoreCase(brand, model);
         }
         return mapCarsToResponse(res);
     }
@@ -39,7 +39,7 @@ public class CarSearchServiceImpl implements CarSearchService {
     public List<CarWithImageSummarized> findCarWithImagesByType(String type) {
         List<Car> cars;
         if (type != null) {
-            cars = carRepository.findAllByTypeIgnoreCase(type);
+            cars = carRepository.findAllByTypeContainingIgnoreCase(type);
         } else {
             cars = carRepository.findAll();
         }
@@ -50,7 +50,7 @@ public class CarSearchServiceImpl implements CarSearchService {
     public List<CarWithImageSummarized> findCarWithImagesByTypeMotor(String typeMotor) {
         List<Car> cars;
         if (typeMotor != null) {
-            cars = carRepository.findAllByMotorTypeIgnoreCase(typeMotor);
+            cars = carRepository.findAllByMotorTypeContainingIgnoreCase(typeMotor);
         } else {
             cars = carRepository.findAll();
         }
@@ -58,14 +58,14 @@ public class CarSearchServiceImpl implements CarSearchService {
     }
 
     @Override
-    public List<CarWithImageSummarized> findCarWithImagesByIntervalPrice(String minPrice, String maxPrice) {
+    public List<CarWithImageSummarized> findCarWithImagesByIntervalPrice(Long minPrice, Long maxPrice) {
         List<Car> cars;
         if (minPrice != null && maxPrice != null) {
-            cars = carRepository.findAllByPriceBetween(Long.parseLong(minPrice), Long.parseLong(maxPrice));
+            cars = carRepository.findAllByPriceBetween(minPrice, maxPrice);
         } else if (minPrice != null) {
-            cars = carRepository.findAllByPriceGreaterThanEqual(Long.parseLong(minPrice));
+            cars = carRepository.findAllByPriceGreaterThanEqual(minPrice);
         } else if (maxPrice != null) {
-            cars = carRepository.findAllByPriceLessThanEqual(Long.parseLong(maxPrice));
+            cars = carRepository.findAllByPriceLessThanEqual(maxPrice);
         } else {
             cars = carRepository.findAll();
         }

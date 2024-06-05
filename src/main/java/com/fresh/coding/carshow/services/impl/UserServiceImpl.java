@@ -9,6 +9,7 @@ import com.fresh.coding.carshow.repositories.UserRepository;
 import com.fresh.coding.carshow.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserSummarized updateUser(Long id, UserRequest userRequest) {
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
-        user.setPwd(userRequest.password());
+        user.setPwd(userRequest.password() != null ? passwordEncoder.encode(userRequest.password() ): null);
         user.setName(userRequest.name());
         user.setEmail(userRequest.email());
         var savedUser = userRepository.save(user);
