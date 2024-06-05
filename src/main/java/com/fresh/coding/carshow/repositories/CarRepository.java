@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     @Query("SELECT DISTINCT c.type FROM Car c")
     List<String> findAllTypeOfCars();
+
+    @Query("SELECT c FROM Car c WHERE c.type = :type AND c.id <> :id")
+    List<Car> findAllByTypeAndExcludeId(@Param("type") String type, @Param("id") Long id);
 
     List<Car> findAllByModelIgnoreCase(String model);
 

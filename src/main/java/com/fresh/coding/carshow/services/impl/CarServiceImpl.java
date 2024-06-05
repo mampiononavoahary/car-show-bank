@@ -113,5 +113,14 @@ public class CarServiceImpl implements CarService {
         );
     }
 
+    @Override
+    public List<CarWithImageSummarized> findCarsByTypeAndExcludeId(String type, Long id) {
+        var cars = carRepository.findAllByTypeAndExcludeId(type, id);
+        return cars.stream().map(car -> {
+            var images = imageRepository.findAllByCarId(car.getId());
+            return carMapper.toResponse(car, images);
+        }).collect(Collectors.toList());
+    }
+
 
 }

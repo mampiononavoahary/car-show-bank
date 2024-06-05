@@ -68,4 +68,11 @@ public class CarRestController {
         return carService.findAllCarByStatusPinned(Integer.valueOf(limit));
     }
 
+    @GetMapping("/type/{type}/exclude/{id}")
+    public List<CarWithImageSummarized> getCarsByTypeAndExcludeId(
+            @PathVariable String type,
+            @PathVariable Long id) {
+       return carService.findCarsByTypeAndExcludeId(type, id);
+    }
+
 }
