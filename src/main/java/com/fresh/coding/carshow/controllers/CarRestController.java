@@ -3,6 +3,7 @@ package com.fresh.coding.carshow.controllers;
 import com.fresh.coding.carshow.dtos.requests.CarRequest;
 import com.fresh.coding.carshow.dtos.responses.CarSummarized;
 import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
+import com.fresh.coding.carshow.dtos.responses.Paginate;
 import com.fresh.coding.carshow.services.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,18 +26,21 @@ public class CarRestController {
     }
 
     @PutMapping("/{id}")
-    public CarSummarized updateCar(@PathVariable Long id, @RequestBody @Valid CarRequest carRequest){
+    public CarSummarized updateCar(@PathVariable Long id, @RequestBody @Valid CarRequest carRequest) {
         return carService.modifyCarById(id, carRequest);
     }
 
     @DeleteMapping("/{id}")
-    public CarSummarized deleteCar(@PathVariable Long id){
+    public CarSummarized deleteCar(@PathVariable Long id) {
         return carService.deleteCarById(id);
     }
 
     @GetMapping
-    public List<CarWithImageSummarized> getCarWithImages() {
-        return carService.findAllCars();
+    public Paginate<List<CarWithImageSummarized>> getCarWithImages(
+            @RequestParam(defaultValue = "6") String page,
+            @RequestParam(defaultValue = "10") String perPage
+    ) {
+        return carService.paginateCars(Integer.valueOf(page), Integer.valueOf(perPage));
     }
 
     @GetMapping("/brand")

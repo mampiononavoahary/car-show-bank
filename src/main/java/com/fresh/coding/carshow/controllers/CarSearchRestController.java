@@ -16,22 +16,45 @@ import java.util.List;
 public class CarSearchRestController {
     private final CarSearchService carSearchService;
 
-    @GetMapping("/search")
-    public List<CarWithImageSummarized> getCarWithImagesByCritical(
+    @GetMapping("/search/model/brand")
+    public List<CarWithImageSummarized> getCarWithImagesByModelAndBrand(
             @RequestParam(required = false) String brand,
-            @RequestParam(required = false) String model,
-            @RequestParam(required = false) String typeMotor,
-            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String model
+    ) {
+        return carSearchService.findCarWithImagesByModelAndBrand(
+                brand,
+                model
+        );
+    }
+
+    @GetMapping("/search/type")
+    public List<CarWithImageSummarized> getCarWithImagesByType(
+            @RequestParam(required = false) String type
+    ) {
+        return carSearchService.findCarWithImagesByType(
+                type
+        );
+    }
+
+
+    @GetMapping("/search/type-motor")
+    public List<CarWithImageSummarized> getCarWithImagesByTypeMotor(
+            @RequestParam(required = false) String typeMotor
+    ) {
+        return carSearchService.findCarWithImagesByTypeMotor(
+                typeMotor
+        );
+    }
+
+    @GetMapping("/search/interval-price")
+    public List<CarWithImageSummarized> getCarWithImagesByIntervalPrice(
             @RequestParam(required = false) String minPrice,
             @RequestParam(required = false) String maxPrice
     ) {
-        return carSearchService.findCarWithImagesByCritical(
-                brand,
-                model,
-                typeMotor,
-                type,
-                Long.valueOf(minPrice),
-                Long.valueOf(maxPrice)
+        return carSearchService.findCarWithImagesByIntervalPrice(
+                minPrice,
+                maxPrice
         );
     }
+
 }

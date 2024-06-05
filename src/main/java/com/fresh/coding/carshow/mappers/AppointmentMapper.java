@@ -25,7 +25,7 @@ public class AppointmentMapper {
     }
 
 
-    public AppointmentSummarized toResponse(Appointment appointment){
+    public AppointmentSummarized toResponse(Appointment appointment) {
         return new AppointmentSummarized(
                 appointment.getId(),
                 appointment.getName(),

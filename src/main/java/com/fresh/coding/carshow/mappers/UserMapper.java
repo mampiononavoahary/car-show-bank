@@ -17,7 +17,7 @@ public class UserMapper {
     }
 
 
-    public UserSummarized toResponse(User user){
+    public UserSummarized toResponse(User user) {
         return new UserSummarized(
                 user.getId(),
                 user.getEmail(),

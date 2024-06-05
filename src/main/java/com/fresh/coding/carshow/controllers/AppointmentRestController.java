@@ -14,24 +14,24 @@ import java.util.List;
 @RequestMapping("/appointments")
 public class AppointmentRestController {
     private final AppointmentService appointmentService;
-    
+
     @PostMapping
-    public AppointmentSummarized createAppointment(@RequestBody @Valid AppointmentRequest appointmentRequest){
+    public AppointmentSummarized createAppointment(@RequestBody @Valid AppointmentRequest appointmentRequest) {
         return appointmentService.createAppointment(appointmentRequest);
     }
-    
+
     @GetMapping
-    public List<AppointmentSummarized> getAllAppointments(){
+    public List<AppointmentSummarized> getAllAppointments() {
         return appointmentService.findAllAppointments();
     }
 
     @GetMapping("/{id}")
-    public AppointmentSummarized getAppointment(@PathVariable Long id){
+    public AppointmentSummarized getAppointment(@PathVariable Long id) {
         return appointmentService.findAppointment(id);
     }
 
     @PatchMapping("/{id}/{status}")
-    public AppointmentSummarized updateStatusAppointment(@PathVariable Long id, @PathVariable String status){
+    public AppointmentSummarized updateStatusAppointment(@PathVariable Long id, @PathVariable String status) {
         return appointmentService.updateStatusAppointment(id, status);
     }
 }

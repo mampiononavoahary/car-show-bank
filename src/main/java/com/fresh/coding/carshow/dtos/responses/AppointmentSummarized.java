@@ -14,4 +14,5 @@ public record AppointmentSummarized(
         Instant appointmentDate,
         AppointmentStatus status,
         CarSummarized car
-) {}
+) {
+}

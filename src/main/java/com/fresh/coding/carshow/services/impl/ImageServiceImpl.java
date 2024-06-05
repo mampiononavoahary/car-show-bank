@@ -48,12 +48,12 @@ public class ImageServiceImpl implements ImageService {
     @Transactional
     @Override
     public ImageSummarized updateImage(Long id, Long carId, MultipartFile file) {
-        if (!carRepository.existsById(id)){
-           throw new NotFoundException(String.format("Car with id %d not found", carId));
+        if (!carRepository.existsById(id)) {
+            throw new NotFoundException(String.format("Car with id %d not found", carId));
         }
         var image = imageRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("Image with id %d not found", id)));
         var isDeleted = fileService.deleteFile(image.getUrl());
-        if (isDeleted){
+        if (isDeleted) {
             String url = fileService.saveFile(file);
             image.setUrl(url);
             var savedImage = imageRepository.save(image);
@@ -67,7 +67,7 @@ public class ImageServiceImpl implements ImageService {
     public List<ImageSummarized> deleteImage(Long carId) {
         var images = imageRepository.findByCar_Id(carId);
         var res = new ArrayList<ImageSummarized>();
-        for (var image: images){
+        for (var image : images) {
             fileService.deleteFile(image.getUrl());
             var saved = imageMapper.toResponse(image);
             res.add(saved);

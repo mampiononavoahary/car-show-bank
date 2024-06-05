@@ -5,5 +5,11 @@ import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
 import java.util.List;
 
 public interface CarSearchService {
-    List<CarWithImageSummarized> findCarWithImagesByCritical(String brand, String model, String typeMotor, String type, Long minPrice, Long maxPrice);
+    List<CarWithImageSummarized> findCarWithImagesByModelAndBrand(String brand, String model);
+
+    List<CarWithImageSummarized> findCarWithImagesByType(String type);
+
+    List<CarWithImageSummarized> findCarWithImagesByTypeMotor(String typeMotor);
+
+    List<CarWithImageSummarized> findCarWithImagesByIntervalPrice(String minPrice, String maxPrice);
 }

@@ -23,4 +23,20 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     @Query("SELECT DISTINCT c.type FROM Car c")
     List<String> findAllTypeOfCars();
+
+    List<Car> findAllByModelIgnoreCase(String model);
+
+    List<Car> findAllByBrandIgnoreCase(String brand);
+
+    List<Car> findAllByBrandIgnoreCaseAndModelIgnoreCase(String brand, String model);
+
+    List<Car> findAllByPriceBetween(Long minPrice, Long maxPrice);
+
+    List<Car> findAllByMotorTypeIgnoreCase(String typeMotor);
+
+    List<Car> findAllByTypeIgnoreCase(String type);
+
+    List<Car> findAllByPriceGreaterThanEqual(Long price);
+
+    List<Car> findAllByPriceLessThanEqual(Long price);
 }

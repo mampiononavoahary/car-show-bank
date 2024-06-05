@@ -3,9 +3,11 @@ package com.fresh.coding.carshow.services.impl;
 import com.fresh.coding.carshow.dtos.requests.CarRequest;
 import com.fresh.coding.carshow.dtos.responses.CarSummarized;
 import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
+import com.fresh.coding.carshow.dtos.responses.Paginate;
 import com.fresh.coding.carshow.enums.CarStatus;
 import com.fresh.coding.carshow.exceptions.NotFoundException;
 import com.fresh.coding.carshow.mappers.CarMapper;
+import com.fresh.coding.carshow.mappers.ImageMapper;
 import com.fresh.coding.carshow.repositories.CarRepository;
 import com.fresh.coding.carshow.repositories.ImageRepository;
 import com.fresh.coding.carshow.services.CarService;
@@ -24,6 +26,7 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
     private final ImageRepository imageRepository;
     private final CarMapper carMapper;
+    private final ImageMapper imageMapper;
 
 
     @Transactional
@@ -61,7 +64,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarSummarized> findAllCarByStatusPinned(Integer limit) {
         var page = PageRequest.of(0, limit);
-        var cars =  carRepository.findByStatus(CarStatus.PINNED,page).getContent();
+        var cars = carRepository.findByStatus(CarStatus.PINNED, page).getContent();
         return cars.stream()
                 .map(carMapper::toResponse).collect(Collectors.toList());
     }
@@ -90,6 +93,24 @@ public class CarServiceImpl implements CarService {
         var car = carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car not found"));
         carRepository.deleteById(car.getId());
         return carMapper.toResponse(car);
+    }
+
+    @Override
+    public Paginate<List<CarWithImageSummarized>> paginateCars(Integer page, Integer perPage) {
+        var pageRequest = PageRequest.of(page, perPage);
+        var carsPage = carRepository.findAll(pageRequest);
+        var items = carsPage.getContent().stream().map(car -> {
+            var images = imageRepository.findByCar_Id(car.getId())
+                    .stream().map(imageMapper::toResponse)
+                    .collect(Collectors.toList());
+            return carMapper.toResponse(car, images);
+        }).collect(Collectors.toList());
+        return new Paginate<>(
+                items,
+                carsPage.getNumber(),
+                carsPage.getTotalPages(),
+                carsPage.getTotalElements()
+        );
     }
 
 

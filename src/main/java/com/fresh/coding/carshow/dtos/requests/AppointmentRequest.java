@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 
 import java.time.Instant;
 
-public record AppointmentRequest (
+public record AppointmentRequest(
         Long id,
         @NotEmpty(message = "Name cannot be empty.")
         @NotBlank(message = "Name cannot be blank.")
@@ -38,5 +38,5 @@ public record AppointmentRequest (
 
         @NotNull
         Long carId
-){
+) {
 }

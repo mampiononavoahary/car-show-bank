@@ -3,6 +3,7 @@ package com.fresh.coding.carshow.services;
 import com.fresh.coding.carshow.dtos.requests.CarRequest;
 import com.fresh.coding.carshow.dtos.responses.CarSummarized;
 import com.fresh.coding.carshow.dtos.responses.CarWithImageSummarized;
+import com.fresh.coding.carshow.dtos.responses.Paginate;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface CarService {
     CarSummarized modifyCarById(Long id, CarRequest carRequest);
 
     CarSummarized deleteCarById(Long id);
+
+    Paginate<List<CarWithImageSummarized>> paginateCars(Integer page, Integer perPage);
 }

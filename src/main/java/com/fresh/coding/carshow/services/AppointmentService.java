@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AppointmentService {
     AppointmentSummarized createAppointment(AppointmentRequest appointmentRequest);
+
     List<AppointmentSummarized> findAllAppointments();
 
     AppointmentSummarized findAppointment(Long id);

@@ -43,6 +43,6 @@ public class ImageRestController {
 
     @DeleteMapping("/{carId}")
     public List<ImageSummarized> deleteImage(@PathVariable Long carId) {
-        return imageService.deleteImage( carId);
+        return imageService.deleteImage(carId);
     }
 }
