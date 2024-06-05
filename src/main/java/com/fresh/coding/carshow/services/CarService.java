@@ -8,6 +8,8 @@ import com.fresh.coding.carshow.dtos.responses.Paginate;
 import java.util.List;
 
 public interface CarService {
+
+    CarSummarized create(CarRequest carRequest);
     List<CarSummarized> createAllCars(List<CarRequest> carRequests);
 
     List<CarWithImageSummarized> findAllCars();

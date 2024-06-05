@@ -33,6 +33,14 @@ public class CarServiceImpl implements CarService {
     private final ImageMapper imageMapper;
 
 
+    @Override
+    public CarSummarized create(CarRequest carRequest) {
+        var car = carMapper.toEntity(carRequest);
+        var saved = carRepository.save(car);
+        var carRes = carMapper.toResponse(saved);
+        return carRes;
+    }
+
     @Transactional
     @Override
     public List<CarSummarized> createAllCars(List<CarRequest> carRequests) {

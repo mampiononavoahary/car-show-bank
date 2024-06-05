@@ -18,6 +18,10 @@ public class CarRestController {
 
     private final CarService carService;
 
+    @PostMapping("register")
+    public CarSummarized create(@RequestBody CarRequest carRequest){
+        return carService.create(carRequest);
+    }
     @PostMapping
     public List<CarSummarized> createAllCars(
             @RequestBody
